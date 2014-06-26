@@ -20,5 +20,5 @@ echo "-----> Injecting App Task Runner ..."
 id=$(docker run -d $IMAGE /bin/bash -c "/bin/bash /build/task-runner")
 test $(docker wait $id) -eq 0
 output=$(docker logs $id 2>/dev/null)
-echo "$output"
+echo "$output" | sed 's/^/       /'
 docker commit $id $IMAGE > /dev/null
